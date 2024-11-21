@@ -1,3 +1,17 @@
+class Student:
+    def __init__(self):
+        pass
+    def update_student_info(self):
+        pass
+    def display_all_students(self):
+        pass
+    
+
+
+
+
+
+
 while (True):
     print("\n Student Management System")
     print("1. Add a new student")
