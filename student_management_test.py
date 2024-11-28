@@ -2,8 +2,14 @@ import unittest
 from student_management import StudentManagement
 
 class TestStudentManagement(unittest.TestCase):
+    def setUp(self):
+        self.system = StudentManagement()
+
     def test_add_student(self):
-        pass
+        self.system.students = []  
+        self.system.add_student(1, "Zara Fathima", 20, "VG", ["Math", "Science"]) 
+        self.assertEqual(len(self.system.students), 1) 
+
     def test_view_student(self):
         pass
     def test_update_student(self):
@@ -17,4 +23,3 @@ class TestStudentManagement(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-    
