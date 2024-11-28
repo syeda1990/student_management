@@ -9,8 +9,15 @@ class Student:
         
     def update_student_info(self):
         pass
-    def display_all_students(self):
-        pass
+    
+    def display_student(self):
+        return f"""
+        ID: {self.student_id}
+        Name: {self.name}
+        Age: {self.age}
+        Grade: {self.grade}
+        Subjects: {', '.join(self.subjects)}
+        """
 
 # class that will do student mangament functions
 class StudentManagement:
@@ -29,8 +36,11 @@ class StudentManagement:
         self.students.append(Student(student_id, name, age, grade, subjects))
         return "Student added successfully."
     
-    def view_student(self):
-        pass
+    def view_students(self):
+        if not self.students:
+            return "No students found."
+        return "\n".join(student.display_student() for student in self.students)
+    
     def update_student(self):
         pass
     def delete_student(self):
@@ -39,9 +49,6 @@ class StudentManagement:
         pass
     def load_students_from_file(self):
         pass
-
-
-
 
 
 # the main program begins
@@ -68,7 +75,7 @@ if __name__ == "__main__":
                 print(system.add_student(student_id, name, age, grade, [s.strip() for s in subjects]))
 
             elif choice ==2:
-                system.view_student()
+                print(system.view_students())
             elif choice ==3:
                 system.update_student()
             elif choice ==4:
