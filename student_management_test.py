@@ -14,9 +14,9 @@ class TestStudentManagement(unittest.TestCase):
         pass
     def test_update_student(self):
         pass
-    '''def test_delete_student(self):
+    def test_delete_student(self):
         pass
-    def test_save_students_to_file(self):
+    '''def test_save_students_to_file(self):
         pass
     def test_save_students_from_file(self):
         pass'''
