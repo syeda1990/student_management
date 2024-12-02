@@ -60,7 +60,12 @@ class StudentManagement:
         return "Student information updated successfully."
 
     def delete_student(self):
-        pass
+        for student in self.students:
+            if student.student_id == student_id:
+                self.students.remove(student)
+                return "Student deleted successfully."
+        return "Student not found."
+    
     def save_students_to_file(self):
         pass
     def load_students_from_file(self):
@@ -104,7 +109,9 @@ if __name__ == "__main__":
                 print(system.update_student(student_id, name, age, grade, subjects))
                 
             elif choice ==4:
-                system.delete_student()
+                student_id = int(input("Enter Student ID to delete: "))
+                print(system.delete_student(student_id))
+                
             elif choice ==5:
                 system.save_students_to_file()
                 break
