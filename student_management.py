@@ -76,8 +76,17 @@ if __name__ == "__main__":
 
             elif choice ==2:
                 print(system.view_students())
+                
             elif choice ==3:
-                system.update_student()
+                student_id = int(input("Enter Student ID to update: "))
+                name = input("Enter new Name (or leave blank): ") or None
+                age = input("Enter new Age (or leave blank): ") 
+                grade = input("Enter new Grade (or leave blank): ") or None
+                subjects = input("Enter new Subjects (comma-separated, or leave blank): ")
+                age = int(age) if age.isdigit() else None
+                subjects = [s.strip() for s in subjects.split(',')] if subjects else None
+                print(system.update_student(student_id, name, age, grade, subjects))
+                
             elif choice ==4:
                 system.delete_student()
             elif choice ==5:
