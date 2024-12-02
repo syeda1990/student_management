@@ -7,8 +7,15 @@ class Student:
         self.grade = grade
         self.subjects = subjects
         
-    def update_student_info(self):
-        pass
+    def update_student_info(self, name=None, age=None, grade=None, subjects=None):
+        if name:
+            self.name = name
+        if age:
+            self.age = age
+        if grade:
+            self.grade = grade
+        if subjects:
+            self.subjects = subjects
     
     def display_student(self):
         return f"""
@@ -41,8 +48,17 @@ class StudentManagement:
             return "No students found."
         return "\n".join(student.display_student() for student in self.students)
     
-    def update_student(self):
-        pass
+    def update_student(self, student_id, name=None, age=None, grade=None, subjects=None):
+        student = None
+        for s in self.students:
+            if s.student_id == student_id:
+                student = s  
+                break 
+        if not student:
+            return "Student not found."
+        student.update_student_info(name, age, grade, subjects)
+        return "Student information updated successfully."
+
     def delete_student(self):
         pass
     def save_students_to_file(self):
@@ -76,9 +92,9 @@ if __name__ == "__main__":
 
             elif choice ==2:
                 print(system.view_students())
-                
+
             elif choice ==3:
-                student_id = int(input("Enter Student ID to update: "))
+                student_id = int(input("\nEnter Student ID to update: "))
                 name = input("Enter new Name (or leave blank): ") or None
                 age = input("Enter new Age (or leave blank): ") 
                 grade = input("Enter new Grade (or leave blank): ") or None
