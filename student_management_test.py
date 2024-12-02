@@ -12,9 +12,9 @@ class TestStudentManagement(unittest.TestCase):
 
     def test_view_student(self):
         pass
-    '''def test_update_student(self):
+    def test_update_student(self):
         pass
-    def test_delete_student(self):
+    '''def test_delete_student(self):
         pass
     def test_save_students_to_file(self):
         pass
