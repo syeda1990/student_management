@@ -1,3 +1,5 @@
+import json
+
 # class handels student information 
 class Student:
     def __init__(self, student_id, name, age, grade, subjects):
@@ -30,6 +32,7 @@ class Student:
 class StudentManagement:
     def __init__(self):
         self.students=[]
+        self.load_students_from_file()
 
     def add_student(self, student_id, name, age, grade, subjects):
         id_exists = False
@@ -59,7 +62,7 @@ class StudentManagement:
         student.update_student_info(name, age, grade, subjects)
         return "Student information updated successfully."
 
-    def delete_student(self):
+    def delete_student(self,student_id):
         for student in self.students:
             if student.student_id == student_id:
                 self.students.remove(student)
@@ -67,9 +70,40 @@ class StudentManagement:
         return "Student not found."
     
     def save_students_to_file(self):
-        pass
+        try:
+            with open("student.json", "w") as file:
+                student_data = [] 
+                for student in self.students:
+                    student_info = {
+                        "id": student.student_id,
+                        "name": student.name,
+                        "age": student.age,
+                        "grade": student.grade,
+                        "subjects": student.subjects
+                    }
+                    student_data.append(student_info)
+                file.write(json.dumps(student_data, indent=4))
+            return "Students saved to file."
+        except IOError:
+            return "Error saving to file."
+        
     def load_students_from_file(self):
-        pass
+        try:
+            with open("student.json", "r") as file:
+                student_data = json.load(file)
+                for student_info in student_data:
+                    student = Student(
+                        student_id=student_info["id"],
+                        name=student_info["name"],
+                        age=student_info["age"],
+                        grade=student_info["grade"],
+                        subjects=student_info["subjects"]
+                    )
+                    self.students.append(student)
+        except FileNotFoundError:
+            return "File not there "
+        except IOError:
+            return "Error reading file."
 
 
 # the main program begins
@@ -85,7 +119,7 @@ if __name__ == "__main__":
             print("4. Remove a student information")
             print("5. Save to a File and Exit")
 
-            choice=int(input("Select a option from 1-5 "))
+            choice=int(input("\nSelect a option from 1-5 "))
 
             if choice ==1 :
                 student_id = int(input("\nEnter Student ID: "))
